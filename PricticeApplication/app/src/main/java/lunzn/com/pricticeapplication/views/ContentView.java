@@ -1,9 +1,11 @@
 package lunzn.com.pricticeapplication.views;
 
 import android.content.Context;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.animation.Animation;
 import android.view.animation.ScaleAnimation;
 import android.widget.FrameLayout;
 import android.widget.ImageView;
@@ -30,17 +32,13 @@ public class ContentView implements View.OnFocusChangeListener {
     // 根布局
     private ViewGroup rootView;
 
-    // 显示图片内容
-    private ImageView ivContent;
-
-    // 边框
-    private FocusBoundImageView fbDraw;
-
     // 缩放比例
     private static final Float SCALE_RATE = 1.1f;
 
     // 增加长度
     private static final int ADD_LENGTH = 10;
+
+    private static final String TAG = "view";
 
     public ContentView(Context context, int contentType) {
         mContext = context;
@@ -62,32 +60,31 @@ public class ContentView implements View.OnFocusChangeListener {
      */
     private void initView() {
         rootView = (FrameLayout) LayoutInflater.from(mContext).inflate(R.layout.page_content_item_layout, null);
-        // 获取父布局中第一个布局并设置焦点监听
-        rootView.getChildAt(0).setOnFocusChangeListener(this);
-
-        ivContent = rootView.findViewById(R.id.iv_content);
-        fbDraw = rootView.findViewById(R.id.iv_draw);
-
-        ivContent.setOnFocusChangeListener(this);
-        setContent();
+        for (int i = 0; i < rootView.getChildCount(); i++) {
+            // 获取父布局中的子布局并设置焦点监听
+            FrameLayout frameLayout = (FrameLayout) rootView.getChildAt(i);
+            ImageView ivContent = (ImageView) frameLayout.getChildAt(0);
+            setContent(ivContent);
+            frameLayout.setOnFocusChangeListener(this);
+        }
     }
 
     /**
      * 根据contnetType设置显示内容
      */
-    private void setContent() {
+    private void setContent(ImageView imageView) {
         switch (contentType) {
             case ContentType
                     .PAGE_CONTENT_MOVIE:
-                ivContent.setImageResource(R.mipmap.video_classic_movie);
+                imageView.setImageResource(R.mipmap.video_classic_movie);
                 break;
             case ContentType
                     .PAGE_CONTENT_TV:
-                ivContent.setImageResource(R.mipmap.video_classic_tv);
+                imageView.setImageResource(R.mipmap.video_classic_tv);
                 break;
             case ContentType
                     .PAGE_CONTENT_VARIETY:
-                ivContent.setImageResource(R.mipmap.video_classic_zongyi);
+                imageView.setImageResource(R.mipmap.video_classic_zongyi);
                 break;
             default:
 
@@ -98,21 +95,23 @@ public class ContentView implements View.OnFocusChangeListener {
 
     @Override
     public void onFocusChange(View v, boolean hasFocus) {
-        // 绘画边框
-        FocusBoundImageView focusBoundImageView = (FocusBoundImageView) fbDraw;
+        // 获取rootView中的子布局中的第二个控件，并执行焦点改变时的操作
+        FocusBoundImageView fbiView = (FocusBoundImageView) ((FrameLayout)v).getChildAt(1);
+        Log.i(TAG,"focus view: "+v);
         if (hasFocus) {
-            // 获取父布局参数
-            ViewGroup.LayoutParams layoutParams = fbDraw.getLayoutParams();
+            // 获取布局参数
+            ViewGroup.LayoutParams layoutParams = fbiView.getLayoutParams();
             layoutParams.width = v.getWidth() + ADD_LENGTH;
             layoutParams.height = v.getHeight() + ADD_LENGTH;
             // 增加宽、高长度并设置进FocusBoundImageView中
-            focusBoundImageView.setLayoutParams(layoutParams);
-            focusBoundImageView.setVisibility(View.VISIBLE);
+            fbiView.setLayoutParams(layoutParams);
+            fbiView.setVisibility(View.VISIBLE);
             getFocusAnim(v);
         } else {
-            focusBoundImageView.setVisibility(View.GONE);
+            fbiView.setVisibility(View.GONE);
             looseFocusAnim(v);
         }
+
     }
 
     /**
@@ -121,7 +120,7 @@ public class ContentView implements View.OnFocusChangeListener {
      * @param view 需要放大的控件
      */
     private void getFocusAnim(View view) {
-        ScaleAnimation scaleAnimation = new ScaleAnimation(1.0f, SCALE_RATE, 1.0f, SCALE_RATE);
+        ScaleAnimation scaleAnimation = new ScaleAnimation(1.0f, SCALE_RATE, 1.0f, SCALE_RATE, Animation.RELATIVE_TO_SELF, 0.5F, Animation.RELATIVE_TO_SELF, 0.5F);
         scaleAnimation.setFillAfter(true);
         view.bringToFront();
         view.startAnimation(scaleAnimation);
@@ -133,7 +132,7 @@ public class ContentView implements View.OnFocusChangeListener {
      * @param v 需要缩小的控件
      */
     private void looseFocusAnim(View v) {
-        ScaleAnimation scaleAnimation = new ScaleAnimation(SCALE_RATE, 1.0f, SCALE_RATE, 1.0f);
+        ScaleAnimation scaleAnimation = new ScaleAnimation(SCALE_RATE, 1.0f, SCALE_RATE, 1.0f, Animation.RELATIVE_TO_SELF, 0.5F, Animation.RELATIVE_TO_SELF, 0.5F);
         scaleAnimation.setFillAfter(true);
         v.startAnimation(scaleAnimation);
     }
