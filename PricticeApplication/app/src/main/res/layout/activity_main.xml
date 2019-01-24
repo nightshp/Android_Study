@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".MainActivity"
+    android:background="@mipmap/video_classic_background">
+
+    <RadioGroup
+        android:id="@+id/rg_tab_menu"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:layout_gravity="center_horizontal">
+
+        <RadioButton
+            android:id="@+id/rb_movie"
+            style="@style/radioButton_theme"
+            android:text="电影"
+            android:nextFocusDown="@id/vp_content"
+            />
+
+        <RadioButton
+            android:id="@+id/rb_tv"
+            style="@style/radioButton_theme"
+            android:text="电视剧"
+            android:nextFocusDown="@id/vp_content"
+            />
+
+        <RadioButton
+            android:id="@+id/rb_variety"
+            style="@style/radioButton_theme"
+            android:text="综艺"
+            android:nextFocusDown="@id/vp_content"
+            />
+    </RadioGroup>
+
+    <android.support.v4.view.ViewPager
+        android:id="@+id/vp_content"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="120dp"/>
+
+</FrameLayout>
