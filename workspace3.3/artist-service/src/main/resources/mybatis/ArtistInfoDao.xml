@@ -1,0 +1,280 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.lunzn.artist.dao.ArtistInfoDao">
+
+	<!-- 详细信息表字段映射关系 -->
+	<resultMap id="artistInfo" type="com.lunzn.artist.model.ArtistInfoBean">
+		<result column="artistcode" property="artistCode" />
+		<result column="defaultlanguage" property="defaultLanguage" />
+		<result column="artisttype" property="artistType" />
+		<result column="sex" property="sex" />
+		<result column="birthday" property="birthday" />
+		<result column="nationality" property="nationAlity" />
+		<result column="bloodgroup" property="bloodGroup" />
+		<result column="constellation" property="constellation" />
+		<result column="height" property="height" />
+		<result column="weight" property="weight" />
+		<result column="isteam" property="isTeam" />
+		<result column="zone" property="zone" />
+		<result column="companyname" property="companyName" />
+		<result column="buildtime" property="buildTime" />
+		<result column="joinintime" property="joinInTime" />
+		<result column="education" property="education" />
+		<result column="favorite" property="favorite" />
+		<result column="mothertongue" property="motherTongue" />
+		<result column="marriage" property="marriage" />
+		<result column="head_img" property="headIimg" />
+	    <result column="firstname" property="firstName" />
+		<result column="lastname" property="lastName" />
+		<result column="searchname" property="searchName" />
+		<result column="updatetime" property="updateTime" />
+		<result column="createtime" property="createTime" />
+	</resultMap>
+	
+	<!-- 分页 -->
+	<sql id="limit_body">
+		<if test="offset != null and pageSize != null">
+			LIMIT #{offset},#{pageSize}
+		</if>
+	</sql>
+	
+	<!-- 新增数据 -->
+	<insert id="insert" >
+			insert into t_artist_info
+			<trim prefix="(" suffix=")" suffixOverrides=",">
+			<if test="artistCode != null">
+				artistcode,
+			</if>
+			<if test="defaultLanguage != null and defaultLanguage != '' ">
+				defaultlanguage,
+			</if>
+			<if test="artistType != null and artistType != ''">
+				artisttype,
+			</if>
+			<if test="sex != null and sex != ''">
+				sex,
+			</if>
+			<if test="birthday != null">
+				birthday,
+			</if>
+			<if test="nationAlity != null and nationAlity != ''">
+				nationality,
+			</if>
+			<if test="bloodGroup != null and bloodGroup != ''">
+				bloodgroup,
+			</if>
+			<if test="constellation != null and constellation != '' ">
+				constellation,
+			</if>
+			<if test="height != null ">
+				height,
+			</if>
+			<if test="weight != null">
+				weight,
+			</if>
+			<if test="isTeam != null">
+				isteam,
+			</if>
+			<if test="zone != null and zone != ''">
+				zone,
+			</if>
+			<if test="companyName != null and companyName != ''">
+				companyname,
+			</if>
+			<if test="buildTime != null ">
+				buildtime,
+			</if>
+			<if test="joinInTime != null">
+				joinintime,
+			</if>
+			<if test="education != null and education != ''">
+				education,
+			</if>
+			<if test="favorite != null and favorite != ''">
+				favorite,
+			</if>
+			<if test="motherTongue != null and motherTongue != ''">
+				mothertongue,
+			</if>
+			<if test="marriage != null">
+				marriage,
+			</if>
+			<if test="headIimg != null">
+				head_img
+			</if>
+			<if test="firstName != null and firstName != ''">
+				firstname,
+			</if>
+			<if test="lastName != null and lastName != ''">
+				lastname,
+			</if>
+			<if test="searchName != null and searchName != ''">
+				searchname,
+			</if>
+			    createtime
+		    </trim>
+		    values
+		    <trim prefix="(" suffix=")" suffixOverrides=",">
+			<if test="artistCode != null">
+				#{artistCode},
+			</if>
+			<if test="defaultLanguage != null and defaultLanguage != '' ">
+				#{defaultLanguage},
+			</if>
+			<if test="artistType != null and artistType != ''">
+				#{artistType},
+			</if>
+			<if test="sex != null and sex != ''">
+				#{sex},
+			</if>
+			<if test="birthday != null">
+				#{birthday},
+			</if>
+			<if test="nationAlity != null and nationAlity != ''">
+				#{nationAlity},
+			</if>
+			<if test="bloodGroup != null and bloodGroup != ''">
+				#{bloodGroup},
+			</if>
+			<if test="constellation != null and constellation != '' ">
+				#{constellation},
+			</if>
+			<if test="height != null">
+				#{height},
+			</if>
+			<if test="weight != null">
+				#{weight},
+			</if>
+			<if test="isTeam != null">
+				#{isTeam},
+			</if>
+			<if test="zone != null and zone != ''">
+				#{zone},
+			</if>
+			<if test="companyName != null and companyName != ''">
+				#{companyName},
+			</if>
+			<if test="buildTime != null">
+				#{buildTime},
+			</if>
+			<if test="joinInTime != null">
+				#{joinInTime},
+			</if>
+			<if test="education != null and education != ''">
+				#{education},
+			</if>
+			<if test="favorite != null and favorite != ''">
+				#{favorite},
+			</if>
+			<if test="motherTongue != null and motherTongue != ''">
+				#{motherTongue},
+			</if>
+			<if test="marriage != null">
+				#{marriage},
+			</if>
+			<if test="headIimg != null">
+				#{headIimg},
+			</if>
+			<if test="firstName != null and firstName != ''">
+				#{firstName},
+			</if>
+			<if test="lastName != null and lastName != ''">
+				#{lastName},
+			</if>
+			<if test="searchName != null and searchName != ''">
+				#{searchName},
+			</if>
+		        sysdate()
+			</trim>
+      </insert>
+      
+       <!-- 删除艺人详细信息 -->
+	<delete id="delete">
+		delete from t_artist_info where artistcode=#{artistCode}
+	</delete>
+    
+    <!-- 更新艺人基本信息 -->
+    <update id="update"> 
+    update t_artist_info 
+    <trim prefix="set" suffixOverrides=",">
+      <if test="artistType != null">
+      artisttype = #{artistType},
+      </if>
+	  <if test="sex != null">
+       sex = #{sex},
+      </if>
+	  <if test="birthday != null">
+      birthday = #{birthday},
+      </if>
+	  <if test="nationAlity != null">
+      nationality = #{nationAlity},
+      </if>
+	  <if test="bloodGroup != null">
+      bloodgroup = #{bloodGroup},
+      </if>
+	  <if test="constellation != null">
+      constellation = #{constellation},
+      </if>
+	  <if test="height != null">
+       height = #{height},
+      </if>
+	  <if test="weight != null">
+      weight = #{weight},
+      </if>
+	  <if test="isTeam != null">
+      isteam = #{isTeam},
+      </if>
+	  <if test="zone != null">
+      zone = #{zone},
+      </if>
+	  <if test="companyName != null">
+      companyname = #{companyName},
+      </if>
+	  <if test="buildTime != null">
+      buildtime = #{buildTime},
+      </if>
+	  <if test="joinInTime != null">
+      joinintime = #{joinInTime},
+      </if>
+	  <if test="education != null">
+      education = #{education},
+      </if>
+	  <if test="favorite != null">
+      favorite = #{favorite},
+      </if>
+	  <if test="motherTongue != null">
+      mothertongue = #{motherTongue},
+      </if>
+	  <if test="marriage != null">
+      marriage = #{marriage},
+      </if>
+	  <if test="headIimg != null">
+      head_img = #{headIimg},
+      </if>
+	  <if test="firstName != null">
+      firstname =#{firstName},
+      </if>
+	  <if test="lastName != null">
+      lastname=#{lastName},
+      </if>
+	  <if test="searchName != null">
+      searchname=#{searchName},
+      </if>
+      updatetime=SYSDATE(),
+      operationstatus=#{operationStatus}
+      </trim>
+		where artistcode = #{artistCode}
+ 
+    </update>
+    
+    <!-- 检查artistcode是否重复 -->
+     <select id="checkArtistCode" resultType="int">
+        select count(1) from t_artist_info 
+        <where>
+            <if test="artistCode != null and artistCode != ''">
+                AND artistcode != #{artistCode}
+            </if>
+            
+        </where>
+    </select>
+</mapper>

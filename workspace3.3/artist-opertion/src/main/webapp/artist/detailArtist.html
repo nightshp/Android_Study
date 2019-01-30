@@ -1,0 +1,296 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>艺人详细信息</title>
+ <meta name="viewport" content="width=device-width, initial-scale=1,user-scalable=no;">
+ <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <!-- CSS件 -->
+    <!-- jQuery文件。务必在bootstrap.min.js 之前引入 -->
+<script src="../jquery/jquery.min.js"></script>
+<!-- 导入公共样式和js -->
+<script src="../theme/js/common.js"></script>
+<!-- 选择 -->
+<script src="../bootstrap/js/bootstrap-select.min.js"></script>
+<link href="../bootstrap/css/bootstrap-select.min.css" media="all" rel="stylesheet" type="text/css"/>
+<script src="./detailArtist.js"></script>
+
+</head>
+<body>
+<div><h3>&nbsp;&nbsp;&nbsp;多语言信息</h3></div>
+<hr>
+<div>
+<button type="button" id="hide" style="margin-left:5px;min-width: 100px;" class="btn btn-success " name="lang" value="中文">中文</button>
+<button type="button" id="show" style="margin-left:5px;min-width: 100px;" class="btn btn-default " name="lang" value="英文">英文</button>
+</div>
+<div><br></div>
+          <div >
+ 
+				<form class="form-horizontal" id="searchform">
+				<!-- 中文 -->
+				<div id="div1">
+				  <div class="row"> 
+				           <div class="form-group  col-md-4">
+                                <label  class="col-md-3 control-label"  style="text-align: right;">编号：</label>
+                                <div class="col-md-9">
+                                  <input type="text" class="form-control" id="idArtistCode" name="artistCode" readonly />
+                                </div>
+                              </div>
+							  <div class="form-group col-md-4">
+							     <label  class="col-md-3 control-label"  style="text-align: right;" >名称：</label> 
+							    <div class="col-md-9">
+							    <input type="text" class="form-control" id="idName"  name="name" readonly >
+							    </div>
+							  </div>
+							  <div class="form-group  col-md-4">
+                                <label  class="col-md-3 control-label"  style="text-align: right;">外文名：</label>
+                                <div class="col-md-9">
+                                  <input type="text" class="form-control" id="idForignName"  name="foreignName"  readonly>
+                                </div>
+                              </div>
+				   </div>
+				   <div class="row">
+				               <div class="form-group  col-md-4">
+                                <label  class="col-md-3 control-label" style="text-align: right;">别名：</label>
+                                    <div class="col-md-9">
+                                          <input type="text" class="form-control" id="idAlias" name="alias"  readonly>
+                                    </div>
+                              </div>
+                              
+                              <div class="form-group  col-md-4">
+                                <label  class="col-md-3 control-label" style="text-align: right;" >出生地：</label>
+                                <div class="col-md-9">
+                                      <input type="text" class="form-control" id="idHomeTown"  name="homeTown" readonly/>
+                                </div>
+                              </div>
+                                 <div class="form-group  col-md-4">
+                                <label  class="col-md-3 control-label" style="text-align: right;">简介：</label>
+                                    <div class="col-md-9">
+                                          <textarea class="form-control" rows="4"  id="idDes" name="des"  readonly></textarea>
+                                    </div>
+                              </div>
+                              
+                   </div>
+                   </div>
+                   <!-- 英文 -->
+                   <div id="div2" style="display:none">
+				  <div class="row"> 
+				           <div class="form-group  col-md-4">
+                                <label  class="col-md-3 control-label" style="text-align: right;">artistCode：</label>
+                                <div class="col-md-9">
+                                  <input type="text" class="form-control" id="idArtistCode1" name="artistCode" readonly />
+                                </div>
+                              </div>
+							  <div class="form-group col-md-4">
+							     <label  class="col-md-3 control-label"  style="text-align: right;" >name：</label> 
+							    <div class="col-md-9">
+							    <input type="text" class="form-control" id="idName1"  name="name"  readonly>
+							    </div>
+							  </div>
+							  <div class="form-group  col-md-4">
+                                <label  class="col-md-3 control-label"  style="text-align: right;">foreignName：</label>
+                                <div class="col-md-9">
+                                  <input type="text" class="form-control" id="idForignName1" name="foreignName" readonly>
+                                </div>
+                              </div>
+				   </div>
+				   <div class="row">
+				               <div class="form-group  col-md-4">
+                                <label  class="col-md-3 control-label" style="text-align: right;">alias：</label>
+                                    <div class="col-md-9">
+                                          <input type="text" class="form-control" id="idAlias1" name="alias"  readonly>
+                                    </div>
+                              </div>
+                              
+                              <div class="form-group  col-md-4">
+                                <label  class="col-md-3 control-label" style="text-align: right;" >homeTown：</label>
+                                <div class="col-md-9">
+                                      <input type="text" class="form-control" id="idHomeTown1"  name="homeTown"  readonly/>
+                                </div>
+                              </div>
+                                 <div class="form-group  col-md-4">
+                                <label  class="col-md-3 control-label" style="text-align: right;">des：</label>
+                                    <div class="col-md-9">
+                                          <textarea class="form-control" rows="4"  id="idDes1" name="des"  readonly></textarea>
+                                    </div>
+                              </div>
+                              
+                   </div>
+        
+                   </div>
+                   
+                   
+                   <div><h3>&nbsp;&nbsp;&nbsp;基本信息</h3></div>
+                    <hr>
+                      <div class="row">
+				                    <div class="form-group  col-md-4">
+                                <label  class="col-md-3 control-label" style="text-align: right;">性别：</label>
+                                    <div class="col-md-9">
+                                     <input type="text" class="form-control" id="idSex"  name="sex"  readonly/>
+                      
+                                    </div>
+                              </div>
+                              
+                              <div class="form-group  col-md-4">
+                                <label  class="col-md-3 control-label" style="text-align: right;" >出生日期：</label>
+                                <div class="col-md-9">
+                                      <input type="date" class="form-control" id="idBirthday" name="birthday" readonly></input>
+                                </div>
+                              </div>
+                                 <div class="form-group  col-md-4">
+                                <label  class="col-md-3 control-label" style="text-align: right;">国籍：</label>
+                                    <div class="col-md-9">
+                                     <input type="text" class="form-control" id="idNationality"  name="nationAlity"  readonly/>
+                                       
+                                    </div>
+                              </div>
+                             
+                              
+                   </div>
+                      <div class="row">
+				                    <div class="form-group  col-md-4">
+                                <label  class="col-md-3 control-label" style="text-align: right;">血型：</label>
+                                    <div class="col-md-9">
+                                     <input type="text" class="form-control" id="idBloodgroup"  name="bloodGroup"  readonly/>
+                                   
+                                    </div>
+                              </div>
+                              
+                              <div class="form-group  col-md-4">
+                                <label  class="col-md-3 control-label" style="text-align: right;" >星座：</label>
+                                <div class="col-md-9">
+                                 <input type="text" class="form-control" id="idConstellation"  name="constellation"  readonly/>
+                                     
+                                </div>
+                              </div>
+                                 <div class="form-group  col-md-4">
+                                <label  class="col-md-3 control-label" style="text-align: right;">是否团队组合：</label>
+                                    <div class="col-md-9">
+                                     <input type="text" class="form-control" id="idIsteam"  name="isTeam"  readonly/>
+                                    </div>
+                              </div>
+                              
+                              
+                   </div>
+                      <div class="row">
+				                    <div class="form-group  col-md-4">
+                                <label  class="col-md-3 control-label" style="text-align: right;">身高：</label>
+                                    <div class="col-md-9">
+                                          <input type="text" class="form-control" id="idHeight" name="height"  readonly/>
+                                    </div>
+                              </div>
+                              
+                              <div class="form-group  col-md-4">
+                                <label  class="col-md-3 control-label" style="text-align: right;" >体重：</label>
+                                <div class="col-md-9">
+                                      <input type="text" class="form-control" id="idWeight" name="weight"  readonly/>
+                                </div>
+                              </div>
+                                 <div class="form-group  col-md-4">
+                                <label  class="col-md-3 control-label" style="text-align: right;">归属地：</label>
+                                    <div class="col-md-9">
+                                          <input type="text" class="form-control" id="idZone" name="zone"  readonly/>
+                                    </div>
+                              </div>
+                   </div>
+                   
+                    <div class="row">
+				                    <div class="form-group  col-md-4">
+                                <label  class="col-md-3 control-label" style="text-align: right;">名：</label>
+                                    <div class="col-md-9">
+                                          <input type="text" class="form-control" id="idFirstName" name="firstName" readonly/>
+                                    </div>
+                              </div>
+                              
+                              <div class="form-group  col-md-4">
+                                <label  class="col-md-3 control-label" style="text-align: right;" >姓：</label>
+                                <div class="col-md-9">
+                                      <input class="form-control" id="idLastName" name="lastName"  readonly/>
+                                </div>
+                              </div>
+                                 <div class="form-group  col-md-4">
+                                <label  class="col-md-3 control-label" style="text-align: right;">艺术家检索名：</label>
+                                    <div class="col-md-9">
+                                          <input type="text" class="form-control" id="idSearchName" name="searchName" readonly />
+                                    </div>
+                              </div>
+                              
+                   </div>
+                   
+                      <div class="row">
+				                    <div class="form-group  col-md-4">
+                                <label  class="col-md-3 control-label" style="text-align: right;">所属公司名称：</label>
+                                    <div class="col-md-9">
+                                          <input type="text" class="form-control" id="idCompanyName" name="companyName" readonly />
+                                    </div>
+                              </div>
+                              
+                              <div class="form-group  col-md-4">
+                                <label  class="col-md-3 control-label" style="text-align: right;" >出道时间：</label>
+                                <div class="col-md-9">
+                                      <input type="text" class="form-control" id="idBuildTime" name="buildTime" readonly/>
+                                </div>
+                              </div>
+                                 <div class="form-group  col-md-4">
+                                <label  class="col-md-3 control-label" style="text-align: right;">签约公司时间：</label>
+                                    <div class="col-md-9">
+                                          <input type="text" class="form-control" id="idJoinintime" name="joininTime" readonly/>
+                                    </div>
+                              </div>
+                              
+                   </div>
+                    
+                      <div class="row">
+				                    <div class="form-group  col-md-4">
+                                <label  class="col-md-3 control-label" style="text-align: right;">教育程度：</label>
+                                    <div class="col-md-9">
+                                          <input type="text" class="form-control" id="idEducation" name="education"  readonly/>
+                                    </div>
+                              </div>
+                              
+                              <div class="form-group  col-md-4">
+                                <label  class="col-md-3 control-label" style="text-align: right;" >爱好：</label>
+                                <div class="col-md-9">
+                                      <input class="form-control" id="idFavorite" name="favorite"  readonly/>
+                                </div>
+                              </div>
+                                 <div class="form-group  col-md-4">
+                                <label  class="col-md-3 control-label" style="text-align: right;">母语：</label>
+                                    <div class="col-md-9">
+                                     <input type="text" class="form-control" id="idMothertongue"  name="motherTongue"  readonly/>
+                                       
+                                    </div>
+                              </div>
+                              
+                   </div>
+                      <div class="row">
+				                    <div class="form-group  col-md-4">
+                                <label  class="col-md-3 control-label" style="text-align: right;">婚姻状态：</label>
+                                    <div class="col-md-9">
+                                     <input type="text" class="form-control" id="idMarriage"  name="marriage"  readonly/>
+                                     
+                                          
+                                    </div>
+                              </div>
+                              
+                              <div class="form-group  col-md-4">
+                                <label  class="col-md-3 control-label" style="text-align: right;" >职业：</label>
+                                <div class="col-md-9">
+                                 <input type="text" class="form-control" id="idArtisttype"  name="artistType"  readonly/>
+                                   
+                                </div>
+                              </div>
+                              
+                            
+                              
+                   </div>
+                   
+				</form>
+                               <br/><br/>
+                                 <div align="center" >
+                                  <button id="btnReturn" type="button" style="min-width: 100px;" class="btn btn-primary">返回</button>
+                     </div>
+                                        
+                  </div>
+</body>
+</html>

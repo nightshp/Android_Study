@@ -1,0 +1,46 @@
+<?xml version="1.0"?>
+<project xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd" xmlns="http://maven.apache.org/POM/4.0.0"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+  <modelVersion>4.0.0</modelVersion>
+
+	<parent>
+		<groupId>com.lunzn.artist</groupId>
+		<artifactId>artist</artifactId>
+		<version>1.0</version>
+	</parent>
+	
+		<!-- 本工程 -->
+	<artifactId>artist-sdk</artifactId>
+	<packaging>jar</packaging>
+  
+  
+  <dependencies>
+		<!-- 项目公共包 -->
+		<dependency>
+			<groupId>com.lunzn.artist</groupId>
+			<artifactId>artist-common</artifactId>
+			<version>${project.version}</version>
+		</dependency>
+		
+	</dependencies>
+
+	<!-- Package as an executable jar -->
+	<build>
+		<finalName>artist-service</finalName>
+		<plugins>
+			<plugin>
+				<groupId>org.springframework.boot</groupId>
+				<artifactId>spring-boot-maven-plugin</artifactId>
+			</plugin>
+
+			<plugin>
+				<artifactId>maven-compiler-plugin</artifactId>
+				<configuration>
+					<source>1.8</source>
+					<target>1.8</target>
+				</configuration>
+			</plugin>
+		</plugins>
+	</build>
+
+</project>

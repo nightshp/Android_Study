@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.lunzn.artist.dao.DataDicDao">
+
+	<!-- 字典表字段映射关系 -->
+	<resultMap id="dataDic" type="com.lunzn.artist.model.DataDicBean">
+		<id column="dictionarycode" property="dictionaryCode" />
+		<result column="dictionaryname" property="dictionaryName" />
+		<result column="dicitemcode" property="dicitemCode" />
+		<result column="dicitemname_zh" property="dicitemNameZh" />
+		<result column="dicitemname_en" property="dicitemNameEn" />
+	</resultMap>
+	
+	<!-- 分页 -->
+	<sql id="limit_body">
+		<if test="offset != null and pageSize != null">
+			LIMIT #{offset},#{pageSize}
+		</if>
+	</sql>
+	
+	<!-- 查询所有数据 -->
+	<select id="queryDataDic" resultMap="dataDic">
+		select dicitemname_zh,dicitemcode from t_datadic where dictionarycode=#{dictionaryCode}
+	</select>
+</mapper>

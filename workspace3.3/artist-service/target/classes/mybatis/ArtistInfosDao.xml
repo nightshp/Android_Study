@@ -1,0 +1,122 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.lunzn.artist.dao.ArtistInfosDao">
+
+	<!-- 查询艺人列表字段映射关系 -->
+	<resultMap id="ArtistInfoList" type="com.lunzn.artist.model.ArtistInfoListBean">
+		<result column="artistcode" property="artistCode" />
+		<result column="name" property="name" />
+		<result column="hometown" property="homeTown" />
+		<result column="alias" property="alias" />
+		<result column="foreignname" property="foreignName" />
+		<result column="artisttype" property="artistType" />
+		<result column="nationality" property="nationAlity" />
+	</resultMap>
+	
+	<!-- 艺人详细信息字段映射 -->
+	<resultMap id="ArtistDetaile" type="com.lunzn.artist.model.ArtistDetaileInfoBean">
+		<result column="artistcode" property="artistCode" />
+		<result column="defaultlanguage" property="defaultLanguage" />
+		<result column="artisttype" property="artistType" />
+		<result column="sex" property="sex" />
+		<result column="birthday" property="birthday" />
+		<result column="nationality" property="nationAlity" />
+		<result column="bloodgroup" property="bloodGroup" />
+		<result column="constellation" property="constellation" />
+		<result column="height" property="height" />
+		<result column="weight" property="weight" />
+		<result column="isteam" property="isTeam" />
+		<result column="zone" property="zone" />
+		<result column="companyname" property="companyName" />
+		<result column="buildtime" property="buildTime" />
+		<result column="joinintime" property="joinInTime" />
+		<result column="education" property="education" />
+		<result column="favorite" property="favorite" />
+		<result column="mothertongue" property="motherTongue" />
+		<result column="marriage" property="marriage" />
+		<result column="head_img" property="headIimg" />
+	    <result column="firstname" property="firstName" />
+		<result column="lastname" property="lastName" />
+		<result column="searchname" property="searchName" />
+		<result column="updatetime" property="updateTime" />
+		<result column="createtime" property="createTime" />
+		
+		<collection property="artistI18nBeans" ofType="com.lunzn.artist.model.ArtistI18nBean">
+		<result column="lang" property="lang" />
+		<result column="artistcode" property="artistCode" />
+		<result column="name" property="name" />
+		<result column="des" property="des" />
+		<result column="hometown" property="homeTown" />
+		<result column="alias" property="alias" />
+		<result column="foreignname" property="foreignName" />
+		<result column="operationstatus" property="operationStatus" />
+	    </collection>
+	</resultMap>
+	
+	<!-- 分页 -->
+	<sql id="limit_body">
+		<if test="offset != null and pageSize != null">
+			LIMIT #{offset},#{pageSize}
+		</if>
+	</sql>
+	
+	<!-- 查询列表数据 -->
+	<select id="queryArtistInfoList" resultMap="ArtistInfoList">
+		select a.*,b.*
+		from t_artist_i18n a INNER JOIN t_artist_info b on a.artistcode=b.artistcode 
+		<where>
+		   a.lang=b.defaultlanguage
+	        <include refid="query_sql_condition"/>
+        </where>
+        order by a.artistcode
+        <include refid="limit_body"/>
+	</select>
+	
+	<!-- 查询详细信息数据 -->
+	<select id="queryDetaile" resultMap="ArtistDetaile">
+		select a.*,b.*
+		from t_artist_i18n a INNER JOIN t_artist_info b on a.artistcode=b.artistcode 
+	 <where>
+		<if test="artistCode != null">
+		  a.artistcode=#{artistCode}
+		</if>
+		</where>	
+	</select>
+	
+	<!-- 根据条件查询艺人信息 -->
+	  <!-- 查询条件 -->
+    <sql id="query_sql_condition">
+        <if test="artistCode != null and artistCode != ''">
+            AND a.artistcode like CONCAT('%',#{artistCode},'%') 
+        </if>
+        <if test="name != null and name != ''">
+            AND a.name like CONCAT('%',#{name},'%')
+        </if>
+         <if test="alias != null and alias != ''">
+            AND a.alias like CONCAT('%',#{alias},'%')
+        </if>
+         <if test="foreignName != null and foreignName != ''">
+            AND a.foreignname like CONCAT('%',#{foreignName},'%')
+        </if>
+        <if test="homeTown != null and homeTown != ''">
+            AND a.hometown like CONCAT('%',#{homeTown},'%') 
+        </if>
+        <if test="artistType != null and artistType != ''">
+            AND b.artisttype = #{artistType}
+        </if>
+        <if test="nationAlity != null and nationAlity != ''">
+            AND b.nationality = #{nationAlity}
+        </if>
+    </sql>
+
+<!-- 查询总数 -->
+    <select id="queryTotal" resultType="int">
+      select count(1) from t_artist_i18n a
+       inner join t_artist_info  b on a.artistcode=b.artistcode 
+	      <where>
+	        a.lang=b.defaultlanguage
+	        <include refid="query_sql_condition"/>
+        </where>
+    </select>
+
+</mapper>
