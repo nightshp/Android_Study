@@ -1,0 +1,143 @@
+package lunzn.com.pricticeapplication.adapter;
+
+import android.content.Context;
+import android.content.Intent;
+import android.support.v7.widget.RecyclerView;
+import android.view.LayoutInflater;
+import android.view.View;
+import android.view.ViewGroup;
+import android.view.animation.Animation;
+import android.view.animation.ScaleAnimation;
+import android.widget.FrameLayout;
+import android.widget.ImageView;
+import android.widget.TextView;
+
+import com.bumptech.glide.Glide;
+import com.bumptech.glide.request.RequestOptions;
+import com.platfrom.sdk.bean.Video;
+
+import java.util.List;
+
+import lunzn.com.pricticeapplication.R;
+import lunzn.com.pricticeapplication.activity.VideoPlayActivity;
+import lunzn.com.pricticeapplication.views.FocusBoundImageView;
+
+/**
+ * Desc: 影片列表适配器
+ * <p>
+ * Author: suhongpeng
+ * PackageName: lunzn.com.pricticeapplication.adapter
+ * ProjectName: PricticeApplication
+ * Date: 2019/1/29 11:20
+ */
+public class VideoAdapter extends RecyclerView.Adapter<VideoAdapter.VHolder> {
+
+    private List<Video> mVideoList;
+
+    private Context mContext;
+
+    // 缩放比例
+    private static final Float SCALE_RATE = 1.1f;
+
+    public VideoAdapter(Context context) {
+        mContext = context;
+    }
+
+    public void setData(List<Video> videoList) {
+        mVideoList = videoList;
+        notifyDataSetChanged();
+    }
+
+    // 创建布局
+    @Override
+    public VHolder onCreateViewHolder(ViewGroup viewGroup, int position) {
+        View view = LayoutInflater.from(mContext).inflate(R.layout.item_video_list_layout, null);
+        return new VHolder(view);
+    }
+
+    // 绑定数据
+    @Override
+    public void onBindViewHolder(VHolder vHolder, int position) {
+        Video video = mVideoList.get(position);
+        vHolder.mTextView.setText(video.getMvname());
+        vHolder.setVideoPlayUrl("http://221.228.226.23/11/t/j/v/b/tjvbwspwhqdmgouolposcsfafpedmb/sh.yinyuetai.com/691201536EE4912BF7E4F1E2C67B8119.mp4");
+        // 添加默认图片
+        RequestOptions requestOptions = new RequestOptions().placeholder(R.mipmap.video_classic_movie);
+        Glide.with(mContext).load(video.getImgpath()).apply(requestOptions).into(vHolder.mImageView);
+    }
+
+    @Override
+    public int getItemCount() {
+        return mVideoList == null ? 0 : mVideoList.size();
+    }
+
+    class VHolder extends RecyclerView.ViewHolder implements View.OnFocusChangeListener, View.OnClickListener {
+
+        private TextView mTextView;
+
+        private ImageView mImageView;
+
+        // 影片播放地址
+        private String videoPlayUrl;
+
+        public String getVideoPlayUrl() {
+            return videoPlayUrl;
+        }
+
+        public void setVideoPlayUrl(String videoPlayUrl) {
+            this.videoPlayUrl = videoPlayUrl;
+        }
+
+        public VHolder(View itemView) {
+            super(itemView);
+            mTextView = itemView.findViewById(R.id.tv_video_list);
+            mImageView = itemView.findViewById(R.id.iv_video_list);
+            FrameLayout frameLayout = itemView.findViewById(R.id.fl_video);
+            frameLayout.setOnFocusChangeListener(this);
+            frameLayout.setOnClickListener(this);
+        }
+
+        @Override
+        public void onFocusChange(View v, boolean hasFocus) {
+            FocusBoundImageView fbiView = (FocusBoundImageView) ((FrameLayout) v).getChildAt(2);
+            if (hasFocus) {
+                fbiView.setVisibility(View.VISIBLE);
+                getFocusAnim(v);
+            } else {
+                fbiView.setVisibility(View.GONE);
+                looseFocusAnim(v);
+            }
+        }
+
+        @Override
+        public void onClick(View v) {
+            Intent intent = new Intent(mContext, VideoPlayActivity.class);
+            intent.putExtra("videoPlayUrl", getVideoPlayUrl());
+            mContext.startActivity(intent);
+        }
+
+        /**
+         * 获得焦点时执行放大操作
+         *
+         * @param view 需要放大的控件
+         */
+        private void getFocusAnim(View view) {
+            ScaleAnimation scaleAnimation = new ScaleAnimation(1.0f, SCALE_RATE, 1.0f, SCALE_RATE, Animation.RELATIVE_TO_SELF, 0.5F, Animation.RELATIVE_TO_SELF, 0.5F);
+            scaleAnimation.setFillAfter(true);
+            view.bringToFront();
+            view.startAnimation(scaleAnimation);
+        }
+
+        /**
+         * 失去焦点时执行缩小操作
+         *
+         * @param v 需要缩小的控件
+         */
+        private void looseFocusAnim(View v) {
+            ScaleAnimation scaleAnimation = new ScaleAnimation(SCALE_RATE, 1.0f, SCALE_RATE, 1.0f, Animation.RELATIVE_TO_SELF, 0.5F, Animation.RELATIVE_TO_SELF, 0.5F);
+            scaleAnimation.setFillAfter(true);
+            v.startAnimation(scaleAnimation);
+        }
+
+    }
+}
