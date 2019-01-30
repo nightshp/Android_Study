@@ -16,7 +16,8 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
-            android:scaleType="fitXY" />
+            android:scaleType="fitXY"
+            />
 
         <lunzn.com.pricticeapplication.views.FocusBoundImageView
             android:id="@+id/iv_draw"
@@ -40,7 +41,8 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
-            android:scaleType="fitXY" />
+            android:scaleType="fitXY"
+            />
 
         <lunzn.com.pricticeapplication.views.FocusBoundImageView
             android:id="@+id/iv_draw_1"

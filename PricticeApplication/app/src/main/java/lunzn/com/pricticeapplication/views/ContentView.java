@@ -1,6 +1,7 @@
 package lunzn.com.pricticeapplication.views;
 
 import android.content.Context;
+import android.content.Intent;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -11,6 +12,7 @@ import android.widget.FrameLayout;
 import android.widget.ImageView;
 
 import lunzn.com.pricticeapplication.R;
+import lunzn.com.pricticeapplication.activity.VideoListActivity;
 import lunzn.com.pricticeapplication.contants.ContentType;
 
 /**
@@ -21,7 +23,7 @@ import lunzn.com.pricticeapplication.contants.ContentType;
  * ProjectName: PricticeApplication
  * Date: 2019/1/22 19:15
  */
-public class ContentView implements View.OnFocusChangeListener {
+public class ContentView implements View.OnFocusChangeListener, View.OnClickListener {
 
     // 上下文
     private Context mContext;
@@ -66,6 +68,7 @@ public class ContentView implements View.OnFocusChangeListener {
             ImageView ivContent = (ImageView) frameLayout.getChildAt(0);
             setContent(ivContent);
             frameLayout.setOnFocusChangeListener(this);
+            frameLayout.setOnClickListener(this);
         }
     }
 
@@ -138,4 +141,10 @@ public class ContentView implements View.OnFocusChangeListener {
     }
 
 
+    @Override
+    public void onClick(View v) {
+        Intent intent = new Intent(mContext,VideoListActivity.class);
+        intent.putExtra("type",contentType);
+        mContext.startActivity(intent);
+    }
 }

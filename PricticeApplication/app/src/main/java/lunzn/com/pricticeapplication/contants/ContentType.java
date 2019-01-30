@@ -11,12 +11,12 @@ package lunzn.com.pricticeapplication.contants;
 public class ContentType {
 
     // 电影
-    public static final int PAGE_CONTENT_MOVIE = 0;
+    public static final int PAGE_CONTENT_MOVIE = 2;
 
     // 电视剧
-    public static final int PAGE_CONTENT_TV = 1;
+    public static final int PAGE_CONTENT_TV = 4;
 
     // 综艺
-    public static final int PAGE_CONTENT_VARIETY = 2;
+    public static final int PAGE_CONTENT_VARIETY = 16;
 
 }
