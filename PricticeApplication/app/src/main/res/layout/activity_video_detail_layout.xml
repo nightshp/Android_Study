@@ -6,15 +6,21 @@
 
     <LinearLayout
         android:id="@+id/ll"
-        android:layout_width="305px"
-        android:layout_height="405px"
+        android:layout_width="310px"
+        android:layout_height="410px"
+        android:layout_marginTop="30dp"
+        android:layout_marginLeft="40dp"
+        android:layout_marginRight="40dp"
         android:focusable="true"
         android:background="@drawable/img_selector">
 
         <ImageView
             android:id="@+id/iv_detail"
             android:layout_width="300px"
-            android:layout_height="400px" />
+            android:layout_height="400px"
+            android:layout_marginTop="5dp"
+            android:layout_marginLeft="5dp"
+            android:scaleType="fitXY"/>
     </LinearLayout>
 
 
@@ -23,7 +29,7 @@
         android:layout_height="wrap_content"
         android:layout_toRightOf="@id/ll"
         android:layout_marginTop="20dp"
-        android:layout_marginLeft="20dp"
+        android:layout_marginLeft="40dp"
         android:orientation="vertical">
 
         <TextView
@@ -79,9 +85,10 @@
             android:id="@+id/btn_play"
             android:layout_width="100dp"
             android:layout_height="wrap_content"
-            android:layout_marginTop="10dp"
+            android:layout_marginTop="20dp"
             android:gravity="center"
             android:text="播放"
+            android:textSize="20dp"
             android:background="@drawable/color_btn_selector"
             android:focusable="true" />
 
