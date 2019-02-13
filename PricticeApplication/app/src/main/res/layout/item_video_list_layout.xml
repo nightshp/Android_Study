@@ -7,19 +7,21 @@
     <FrameLayout
         android:id="@+id/fl_video"
         android:layout_width="205dp"
-        android:layout_height="310dp"
+        android:layout_height="315dp"
         android:focusable="true"
         android:clickable="true"
         android:layout_marginTop="20dp"
         android:layout_marginBottom="20dp"
-        android:layout_marginRight="40dp"
-        android:layout_marginLeft="40dp">
+        android:layout_marginRight="30dp"
+        android:layout_marginLeft="30dp">
 
 
         <ImageView
             android:id="@+id/iv_video_list"
             android:layout_width="200dp"
             android:layout_height="280dp"
+            android:paddingLeft="3dp"
+            android:paddingTop="2dp"
             android:scaleType="fitXY" />
 
         <TextView
@@ -27,7 +29,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center_horizontal"
-            android:layout_marginTop="290dp"
+            android:layout_marginTop="285dp"
             android:textColor="@color/colorWhite" />
 
 

@@ -93,7 +93,7 @@ public class VideoListActivity extends BaseActivity {
         // 布局管理
 //        mRecyclerView.setLayoutManager(new LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false));
         // 纵向布局
-        mRecyclerView.setLayoutManager(new GridLayoutManager(this, 4));
+        mRecyclerView.setLayoutManager(new GridLayoutManager(this, 5));
         // 画横线
         mRecyclerView.addItemDecoration(new DividerItemDecoration(this, GridLayoutManager.VERTICAL));
         // 默认动画
