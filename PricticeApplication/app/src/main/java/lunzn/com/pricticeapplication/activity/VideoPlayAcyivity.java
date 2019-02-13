@@ -1,6 +1,7 @@
 package lunzn.com.pricticeapplication.activity;
 
 import android.net.Uri;
+import android.view.KeyEvent;
 import android.view.View;
 import android.widget.TextView;
 
@@ -84,6 +85,47 @@ public class VideoPlayAcyivity extends BaseActivity {
                 return true;
             }
         });
+
+        /**
+         * 设置按键监听
+         */
+        mVideoView.setOnKeyListener(new View.OnKeyListener() {
+            /**
+             * 点击按键执行该方法
+             *
+             * @param v       事件源
+             * @param keyCode 键码
+             * @param event   事件
+             * @return false
+             */
+            @Override
+            public boolean onKey(View v, int keyCode, KeyEvent event) {
+                switch (keyCode) {
+                    // 快退
+                    case KeyEvent.KEYCODE_DPAD_LEFT:
+                        mVideoView.seekTo(mVideoView.getCurrentPosition() - 3 * 1000);
+                        break;
+                    // 快进
+                    case KeyEvent.KEYCODE_DPAD_RIGHT:
+                        mVideoView.seekTo(mVideoView.getCurrentPosition() + 3 * 1000);
+                        break;
+                    // 播放、暂停
+                    case KeyEvent.KEYCODE_DPAD_CENTER:
+                        if (event.getAction() == KeyEvent.ACTION_DOWN) {
+                            if (mVideoView.isPlaying()) {
+                                mVideoView.pause();
+                            } else {
+                                mVideoView.start();
+                            }
+                        }
+                        break;
+                    default:
+
+                        break;
+                }
+                return false;
+            }
+        });
     }
 
 
@@ -115,4 +157,5 @@ public class VideoPlayAcyivity extends BaseActivity {
             }
         });
     }
+
 }

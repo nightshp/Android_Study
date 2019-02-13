@@ -97,7 +97,7 @@ public class VideoDetailActivity extends BaseActivity implements View.OnClickLis
         txtScore.setText(video.getScore());
         txtATT.setText(video.getArea() + " · " + video.getReleaseTime().substring(0, 4) + " · " + video.getType());
         txtActor.setText("演员: " + video.getActor());
-        txtDirector.setText("主演: " + video.getDirector());
+        txtDirector.setText("导演: " + video.getDirector());
     }
 
 

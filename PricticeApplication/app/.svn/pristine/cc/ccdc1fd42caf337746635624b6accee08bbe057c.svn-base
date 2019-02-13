@@ -94,12 +94,7 @@ public class VideoAdapter extends RecyclerView.Adapter<VideoAdapter.VHolder> {
         return mVideoList == null ? 0 : mVideoList.size();
     }
 
-    @Override
-    public long getItemId(int position) {
-        return position;
-    }
-
-    //    /**
+//    /**
 //     * item隐藏时调用(防止内存泄漏)
 //     * @param holder VHolder对象
 //     */
