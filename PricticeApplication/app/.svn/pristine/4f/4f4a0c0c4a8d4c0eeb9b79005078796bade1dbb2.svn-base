@@ -86,14 +86,13 @@ public class VideoAdapter extends RecyclerView.Adapter<VideoAdapter.VHolder> {
         // 添加默认图片
         RequestOptions requestOptions = new RequestOptions().placeholder(R.mipmap.movie_default_icon_comm).dontAnimate();
         vHolder.mTextView.setText(video.getMvname());
-        vHolder.mView.setText(video.getMvname());
         Glide.with(vHolder.frameLayout).load(video.getImgpath()).apply(requestOptions).into(vHolder.mImageView);
 
         vHolder.frameLayout.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 if (mOnItemClickListener != null) {
-                    mOnItemClickListener.onItemClick(mVideoList, position);
+                    mOnItemClickListener.onItemClick(video, position);
                 }
             }
         });
@@ -127,8 +126,6 @@ public class VideoAdapter extends RecyclerView.Adapter<VideoAdapter.VHolder> {
 
         private TextView mTextView;
 
-        private TextView mView;
-
         private ImageView mImageView;
 
         private FrameLayout frameLayout;
@@ -137,7 +134,6 @@ public class VideoAdapter extends RecyclerView.Adapter<VideoAdapter.VHolder> {
         public VHolder(View itemView) {
             super(itemView);
             mTextView = itemView.findViewById(R.id.tv_video_list);
-            mView = itemView.findViewById(R.id.tv_video_title);
             mImageView = itemView.findViewById(R.id.iv_video_list);
             frameLayout = itemView.findViewById(R.id.fl_video);
             frameLayout.setOnFocusChangeListener(this);
@@ -145,19 +141,17 @@ public class VideoAdapter extends RecyclerView.Adapter<VideoAdapter.VHolder> {
 
         @Override
         public void onFocusChange(View v, boolean hasFocus) {
-            FocusBoundImageView fbiView = (FocusBoundImageView) ((FrameLayout) v).getChildAt(3);
+            FocusBoundImageView fbiView = (FocusBoundImageView) ((FrameLayout) v).getChildAt(2);
             float toRate = (v.findViewById(R.id.iv_video_list).getHeight() * 1.0f / 2) / v.getHeight();
             if (hasFocus) {
                 // 获取焦点
                 fbiView.setVisibility(View.VISIBLE);
-                mView.setVisibility(View.VISIBLE);
                 FocusAnimUtil.getFocusAnim(v, toRate);
                 int index = (int) v.getTag();
                 mProloadData.proLoadData(index);
             } else {
                 // 失去焦点
                 fbiView.setVisibility(View.GONE);
-                mView.setVisibility(View.GONE);
                 FocusAnimUtil.looseFocusAnim(v, toRate);
             }
         }

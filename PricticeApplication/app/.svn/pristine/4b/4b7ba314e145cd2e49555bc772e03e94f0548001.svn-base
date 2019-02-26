@@ -176,6 +176,7 @@ public class VideoListActivity extends BaseActivity {
                 Video currentVideo = VideoData.mVideoDataMap.get(contentType).get(position);
                 intent.putExtra("mvid", currentVideo.getMvid());
                 intent.putExtra("groupid", currentVideo.getGroupid());
+                intent.putExtra("position", position);
                 intent.putExtra("videoList", JSON.toJSONString(videoList));
                 startActivity(intent);
             }

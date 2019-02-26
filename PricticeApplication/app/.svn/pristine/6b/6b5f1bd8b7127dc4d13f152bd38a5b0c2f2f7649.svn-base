@@ -171,12 +171,9 @@ public class VideoListActivity extends BaseActivity {
     protected void initListener() {
         mAdapter.setOnItemClickListener(new OnItemClickListener() {
             @Override
-            public void onItemClick(List<Video> videoList, int position) {
-                Intent intent = new Intent(VideoListActivity.this, VideosDetailActivity.class);
-                Video currentVideo = VideoData.mVideoDataMap.get(contentType).get(position);
-                intent.putExtra("mvid", currentVideo.getMvid());
-                intent.putExtra("groupid", currentVideo.getGroupid());
-                intent.putExtra("videoList", JSON.toJSONString(videoList));
+            public void onItemClick(Video video, int position) {
+                Intent intent = new Intent(VideoListActivity.this, VideoDetailActivity.class);
+                intent.putExtra("video", JSON.toJSONString(video));
                 startActivity(intent);
             }
         });
