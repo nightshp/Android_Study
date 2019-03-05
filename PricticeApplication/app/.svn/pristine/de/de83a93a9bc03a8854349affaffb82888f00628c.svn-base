@@ -61,8 +61,7 @@
                 android:background="@drawable/txtview_shap"
                 android:gravity="center"
                 android:textColor="@color/colorBlack"
-                android:textSize="26sp"
-                android:visibility="invisible"/>
+                android:textSize="26sp" />
 
         </RelativeLayout>
 

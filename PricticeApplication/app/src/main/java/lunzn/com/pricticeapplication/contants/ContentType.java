@@ -17,6 +17,6 @@ public class ContentType {
     public static final int PAGE_CONTENT_TV = 4;
 
     // 综艺
-    public static final int PAGE_CONTENT_VARIETY = 8;
+    public static final int PAGE_CONTENT_VARIETY = 16;
 
 }

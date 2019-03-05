@@ -299,7 +299,7 @@ public class VideosDetailActivity extends BaseActivity implements View.OnClickLi
         // 集数RadioGroup
         final RadioGroup radioGroup;
         radioGroup = volumeView.findViewById(R.id.rg_volume);
-        final int volume = Integer.parseInt(mVideoDetail.getCurrentVolume());
+        int volume = Integer.parseInt(mVideoDetail.getCurrentVolume());
         for (int i = 0; i < volume; i++) {
             final RadioButton radioButton = new RadioButton(this);
             radioButton.setPadding(22, -2, 0, 0);
@@ -341,13 +341,11 @@ public class VideosDetailActivity extends BaseActivity implements View.OnClickLi
         }
         for (int i = 0; i < count; i++) {
             final RadioButton radioButton = new RadioButton(this);
-//            radioButton.setPadding(22, -2, 0, 0);
+            radioButton.setPadding(22, -2, 0, 0);
             RadioGroup.LayoutParams layoutParams = new RadioGroup.LayoutParams(RadioGroup.LayoutParams.WRAP_CONTENT, 50);
             layoutParams.setMargins(6, 0, 0, 0);
             layoutParams.height = 30;
             layoutParams.width = 100;
-            // 设置内容居中
-            radioButton.setGravity(Gravity.CENTER);
             radioButton.setLayoutParams(layoutParams);
             if (volume <= 10) {   // 集数小于等于10
                 radioButton.setText("1 - " + volume);
