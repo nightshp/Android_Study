@@ -77,6 +77,9 @@
     <select id="selectAll" resultMap="BaseResultMap">
         select user_id, user_name, user_pwd, email, phone, sex ,pic
         from user
+        <where>
+            <include refid="query_sql_condition"/>
+        </where>
         <include refid="limit_body"/>
     </select>
 

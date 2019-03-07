@@ -53,6 +53,7 @@ public class UserServiceImpl implements UserService
     @Override
     public PageHelper<User> selectAll(User user)
     {
+        System.out.println(user.getUserName());
         System.out.println("offset:" + user.getOffset() + "pageSize:" + user.getPageSize());
         // 查询结果集
         List<User> users = userDao.selectAll(user);
