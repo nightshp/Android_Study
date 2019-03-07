@@ -1,0 +1,127 @@
+package lunzn.com.pricticeapplication.views;
+
+import android.content.Context;
+import android.content.Intent;
+import android.util.Log;
+import android.view.LayoutInflater;
+import android.view.View;
+import android.view.ViewGroup;
+import android.widget.FrameLayout;
+import android.widget.ImageView;
+
+import lunzn.com.pricticeapplication.R;
+import lunzn.com.pricticeapplication.activity.VideoListActivity;
+import lunzn.com.pricticeapplication.contants.ContentType;
+import lunzn.com.pricticeapplication.util.FocusAnimUtil;
+
+/**
+ * Desc: 主内容view定义
+ * <p>
+ * Author: suhongpeng
+ * PackageName: lunzn.com.pricticeapplication.views
+ * ProjectName: PricticeApplication
+ * Date: 2019/1/22 19:15
+ */
+public class ContentView implements View.OnFocusChangeListener, View.OnClickListener {
+
+    // 上下文
+    private Context mContext;
+
+    // 主内容类型
+    private int contentType;
+
+    // 根布局
+    private ViewGroup rootView;
+
+    // 相对于自身的移动比例
+    private static final Float TO_RATE = 0.5f;
+
+    // 增加长度
+    private static final int ADD_LENGTH = 10;
+
+    private static final String TAG = "view";
+
+    public ContentView(Context context, int contentType) {
+        mContext = context;
+        this.contentType = contentType;
+        initView();
+    }
+
+    /**
+     * 获取根布局
+     *
+     * @return 根布局View
+     */
+    public View getRootView() {
+        return rootView;
+    }
+
+    /**
+     * 初始化控件
+     */
+    private void initView() {
+        rootView = (FrameLayout) LayoutInflater.from(mContext).inflate(R.layout.page_content_item_layout, null);
+        for (int i = 0; i < rootView.getChildCount(); i++) {
+            // 获取父布局中的子布局并设置焦点监听
+            FrameLayout frameLayout = (FrameLayout) rootView.getChildAt(i);
+            ImageView ivContent = (ImageView) frameLayout.getChildAt(0);
+            setContent(ivContent);
+            frameLayout.setOnFocusChangeListener(this);
+            frameLayout.setOnClickListener(this);
+        }
+    }
+
+    /**
+     * 根据contnetType设置显示内容
+     */
+    private void setContent(ImageView imageView) {
+        switch (contentType) {
+            case ContentType
+                    .PAGE_CONTENT_MOVIE:
+                imageView.setImageResource(R.mipmap.video_classic_movie);
+                break;
+            case ContentType
+                    .PAGE_CONTENT_TV:
+                imageView.setImageResource(R.mipmap.video_classic_tv);
+                break;
+            case ContentType
+                    .PAGE_CONTENT_VARIETY:
+                imageView.setImageResource(R.mipmap.video_classic_zongyi);
+                break;
+            default:
+
+                break;
+        }
+    }
+
+
+    @Override
+    public void onFocusChange(View v, boolean hasFocus) {
+        // 获取rootView中的子布局中的第二个控件，并执行焦点改变时的操作
+        FocusBoundImageView fbiView = (FocusBoundImageView) ((FrameLayout) v).getChildAt(1);
+        Log.i(TAG, "focus view: " + v);
+        if (hasFocus) {
+            // 获取布局参数
+            ViewGroup.LayoutParams layoutParams = fbiView.getLayoutParams();
+            layoutParams.width = v.getWidth() + ADD_LENGTH;
+            layoutParams.height = v.getHeight() + ADD_LENGTH;
+            // 增加宽、高长度并设置进FocusBoundImageView中
+            fbiView.setLayoutParams(layoutParams);
+            fbiView.setVisibility(View.VISIBLE);
+            // 执行放大操作
+            FocusAnimUtil.getFocusAnim(v, TO_RATE);
+        } else {
+            fbiView.setVisibility(View.GONE);
+            // 执行缩小操作
+            FocusAnimUtil.looseFocusAnim(v, TO_RATE);
+        }
+
+    }
+
+    @Override
+    public void onClick(View v) {
+        Intent intent = new Intent(mContext, VideoListActivity.class);
+        intent.putExtra("type", contentType);
+        mContext.startActivity(intent);
+    }
+}

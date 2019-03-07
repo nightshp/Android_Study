@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent" android:layout_height="match_parent"
+    android:background="@mipmap/anthology_detail_bg">
+
+    <HorizontalScrollView
+        android:id="@+id/hsv_volume"
+        android:layout_width="1080px"
+        android:layout_height="match_parent"
+        android:layout_marginLeft="172px"
+        android:layout_marginTop="16px"
+        android:scrollbars="none">
+        <RadioGroup
+            android:id="@+id/rg_volume"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="horizontal"
+            />
+    </HorizontalScrollView>
+
+    <HorizontalScrollView
+        android:id="@+id/hsv_volume_choose"
+        android:layout_width="1000px"
+        android:layout_height="match_parent"
+        android:layout_marginTop="75px"
+        android:layout_marginLeft="224px"
+        android:scrollbars="none">
+
+    <RadioGroup
+        android:id="@+id/rg_volume_choose"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="horizontal"
+        />
+
+   </HorizontalScrollView>
+
+</FrameLayout>

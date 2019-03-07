@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@mipmap/video_classic_background">
+
+    <RadioGroup
+        android:id="@+id/rg_tab_title"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="60.0px"
+        android:layout_marginTop="48.0px"
+        android:orientation="horizontal">
+
+        <RadioButton
+            android:id="@+id/rb_movie_title"
+            android:layout_width="120.0px"
+            android:layout_height="60.0px"
+            android:button="@null"
+            android:gravity="center"
+            android:text="电影"
+            android:nextFocusDown="@id/vp_main_content"
+            android:textColor="@color/main_title_color_selector"
+            android:textSize="28.0px" />
+
+        <RadioButton
+            android:id="@+id/rb_dianshiju_title"
+            android:layout_width="120.0px"
+            android:layout_height="60.0px"
+            android:layout_marginLeft="48.0px"
+            android:button="@null"
+            android:gravity="center"
+            android:nextFocusDown="@id/vp_main_content"
+            android:text="电视剧"
+            android:textColor="@color/main_title_color_selector"
+            android:textSize="28.0px" />
+
+        <RadioButton
+            android:id="@+id/rb_zongyi_title"
+            android:layout_width="120.0px"
+            android:layout_height="60.0px"
+            android:layout_marginLeft="48.0px"
+            android:button="@null"
+            android:gravity="center"
+            android:text="综艺"
+            android:nextFocusDown="@id/vp_main_content"
+            android:textColor="@color/main_title_color_selector"
+            android:textSize="28.0px" />
+
+    </RadioGroup>
+
+    <android.support.v4.view.ViewPager
+        android:id="@+id/vp_main_content"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_marginTop="120.0px">
+
+    </android.support.v4.view.ViewPager>
+
+    
+
+
+</FrameLayout>

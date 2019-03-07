@@ -1,0 +1,90 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <FrameLayout
+        android:id="@+id/rl_video"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content">
+
+        <io.vov.vitamio.widget.VideoView
+            android:id="@+id/vv_play"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:clickable="true"
+            android:focusable="true" />
+
+        <TextView
+            android:id="@+id/tv_percent"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="12dp"
+            android:textColor="#e6ff01"
+            android:visibility="invisible" />
+
+        <TextView
+            android:id="@+id/tv_net_speed"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="142dp"
+            android:layout_toRightOf="@id/tv_percent"
+            android:textColor="#04fa00"
+            android:visibility="invisible" />
+
+        <ImageView
+            android:id="@+id/image_progressbar"
+            android:layout_width="100px"
+            android:layout_height="100px"
+            android:layout_gravity="center"
+            android:src="@drawable/anim_pgbar"
+            android:visibility="invisible" />
+
+        <ImageView
+            android:id="@+id/image_start"
+            android:layout_width="100px"
+            android:layout_height="100px"
+            android:layout_gravity="center"
+            android:src="@mipmap/start"
+            android:visibility="invisible" />
+
+        <ImageView
+            android:id="@+id/image_pause"
+            android:layout_width="100px"
+            android:layout_height="100px"
+            android:layout_gravity="center"
+            android:alpha="0.8"
+            android:src="@mipmap/pause"
+            android:visibility="invisible" />
+
+
+        <ImageView
+            android:id="@+id/image_forward"
+            android:layout_width="100px"
+            android:layout_height="100px"
+            android:layout_gravity="center"
+            android:alpha="0.8"
+            android:src="@mipmap/forward"
+            android:visibility="invisible" />
+
+        <ImageView
+            android:id="@+id/image_back"
+            android:layout_width="100px"
+            android:layout_height="100px"
+            android:layout_gravity="center"
+            android:alpha="0.8"
+            android:src="@mipmap/back"
+            android:visibility="invisible" />
+
+    </FrameLayout>
+
+    <FrameLayout
+        android:id="@+id/fl_video_start"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@mipmap/img2">
+
+
+    </FrameLayout>
+
+</FrameLayout>
